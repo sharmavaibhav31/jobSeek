@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/WelcomeScreen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/forgot_password_screen.dart'; // Import Forgot Password Screen
 import 'screens/home_screen.dart';
 import 'screens/job_listings_screen.dart';
-
+import 'screens/reset_password_screen.dart'; // Fixed missing semicolon
 
 void main() {
   runApp(const MyApp());
@@ -23,11 +24,13 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/login', // Start with Login Screen
       routes: {
+        '/': (context) => const WelcomeScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => RegisterScreen(),
-        '/forgot-password': (context) => ForgotPasswordScreen(), // Added this
-        '/home': (context) => HomeScreen(),  // Added Home Screen Route
-        '/jobs': (context) => const JobListingsScreen(),  // Added Job Listings route
+        '/forgot-password': (context) => ForgotPasswordScreen(),
+        '/reset-password': (context) => ResetPasswordScreen(), // Added Reset Password Route
+        '/home': (context) => HomeScreen(),
+        '/jobs': (context) => const JobListingsScreen(),
       },
     );
   }

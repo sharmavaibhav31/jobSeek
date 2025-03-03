@@ -5,17 +5,17 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState(); // Revert to _HomeScreenState
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> { // Keep the underscore
   int _selectedIndex = 0; // For Bottom Navigation
 
   // List of screens for bottom navigation
   final List<Widget> _screens = [
-    Center(child: Text("Welcome to JobSeek!", style: TextStyle(fontSize: 18))),
-    JobListingsScreen(),  // Job Listings Page
-    Center(child: Text("Profile Page", style: TextStyle(fontSize: 18))),
+    const Center(child: Text("Welcome to Jobizz!", style: TextStyle(fontSize: 18))),
+    const JobListingsScreen(),  // Job Listings Page
+    const Center(child: Text("Profile Page", style: TextStyle(fontSize: 18))),
   ];
 
   void _onItemTapped(int index) {
@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("JobSeek"),
+        title: const Text("Jobizz"),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),

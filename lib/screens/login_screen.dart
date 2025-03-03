@@ -20,21 +20,50 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Company Name (JobSeek)
             Text(
-              "Login",
+              "Jôbizz",
               style: TextStyle(
-                fontSize: 28,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueAccent, // Adjust color as per your theme
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              "Welcome Back 👋",
+              style: TextStyle(
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 5),
+            Text(
+              "Let's log in. Apply to jobs!",
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
             SizedBox(height: 20),
-            _buildTextField("Email", Icons.email),
+
+            _buildTextField("E-mail", Icons.email),
             SizedBox(height: 10),
             _buildPasswordField("Password", Icons.lock),
+            SizedBox(height: 10),
+
+            // Forgot Password Button
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/reset-password');
+                },
+                child: Text("Forgot Password?"),
+              ),
+            ),
+
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/home'); // Navigate to Home
+                Navigator.pushReplacementNamed(context, '/home');
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
@@ -42,15 +71,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text("Login", style: TextStyle(fontSize: 18)),
+              child: Text("Log in", style: TextStyle(fontSize: 18)),
             ),
             SizedBox(height: 10),
+
             Center(
               child: TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/register');
                 },
-                child: Text("Don't have an account? Register here"),
+                child: Text("Haven't an account? Register"),
               ),
             ),
           ],

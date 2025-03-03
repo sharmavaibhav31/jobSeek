@@ -1,40 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../widgets/custom_text_field.dart'; // Import reusable widget
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
-
-  void _register() {
-    String name = _nameController.text.trim();
-    String email = _emailController.text.trim();
-    String password = _passwordController.text;
-    String confirmPassword = _confirmPasswordController.text;
-
-    if (name.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("All fields are required!")));
-      return;
-    }
-
-    if (password != confirmPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Passwords do not match!")));
-      return;
-    }
-
-    // TODO: Implement backend registration logic
-    print("User Registered: $name, $email");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,70 +21,105 @@ class _RegisterScreenState extends State<RegisterScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Register", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+            // Company Name (JobSeek)
+            Text(
+              "JôbSeek",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueAccent, // Adjust color as per your theme
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              "Create Your Account ✨",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              "Join JobSeek and start your journey!",
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
             SizedBox(height: 20),
-            CustomTextField(controller: _nameController, hintText: "Full Name", icon: Icons.person),
+
+            _buildTextField("Full Name", Icons.person),
             SizedBox(height: 10),
-            CustomTextField(controller: _emailController, hintText: "Email", icon: Icons.email),
+            _buildTextField("E-mail", Icons.email),
             SizedBox(height: 10),
-            _buildPasswordField(_passwordController, "Password", Icons.lock, true),
+            _buildPasswordField("Password", Icons.lock, isConfirm: false),
             SizedBox(height: 10),
-            _buildPasswordField(_confirmPasswordController, "Confirm Password", Icons.lock, false),
+            _buildPasswordField("Confirm Password", Icons.lock, isConfirm: true),
             SizedBox(height: 20),
+
             ElevatedButton(
-              onPressed: _register,
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/home');
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               child: Text("Sign Up", style: TextStyle(fontSize: 18)),
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildSocialButton(FontAwesomeIcons.google, Colors.red),
-                SizedBox(width: 20),
-                _buildSocialButton(FontAwesomeIcons.apple, Colors.black),
-                SizedBox(width: 20),
-                _buildSocialButton(FontAwesomeIcons.facebook, Colors.blue),
-              ],
-            )
+            SizedBox(height: 10),
+
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                child: Text("Already have an account? Log in"),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPasswordField(TextEditingController controller, String hintText, IconData icon, bool isPasswordField) {
+  Widget _buildTextField(String hintText, IconData icon) {
     return TextField(
-      controller: controller,
-      obscureText: isPasswordField ? _obscurePassword : _obscureConfirmPassword,
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon),
+        hintText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPasswordField(String hintText, IconData icon, {required bool isConfirm}) {
+    return TextField(
+      obscureText: isConfirm ? _obscureConfirmPassword : _obscurePassword,
       decoration: InputDecoration(
         prefixIcon: Icon(icon),
         suffixIcon: IconButton(
-          icon: Icon(isPasswordField ? (_obscurePassword ? Icons.visibility : Icons.visibility_off) : (_obscureConfirmPassword ? Icons.visibility : Icons.visibility_off)),
+          icon: Icon(
+            isConfirm
+                ? (_obscureConfirmPassword ? Icons.visibility : Icons.visibility_off)
+                : (_obscurePassword ? Icons.visibility : Icons.visibility_off),
+          ),
           onPressed: () {
             setState(() {
-              if (isPasswordField) {
-                _obscurePassword = !_obscurePassword;
-              } else {
+              if (isConfirm) {
                 _obscureConfirmPassword = !_obscureConfirmPassword;
+              } else {
+                _obscurePassword = !_obscurePassword;
               }
             });
           },
         ),
         hintText: hintText,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
-    );
-  }
-
-  Widget _buildSocialButton(IconData icon, Color color) {
-    return CircleAvatar(
-      backgroundColor: color,
-      radius: 25,
-      child: Icon(icon, color: Colors.white),
     );
   }
 }
