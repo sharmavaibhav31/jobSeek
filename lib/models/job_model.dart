@@ -32,4 +32,45 @@ List<Job> dummyJobs = [
     location: "Mumbai",
     description: "Creative UI/UX designer with knowledge of Figma.",
   ),
+  Job(
+    title: "Frontend Developer",
+    company: "TechSolutions",
+    location: "Bangalore",
+    description: "Experienced React developer with 3+ years in building responsive web applications.",
+  ),
+
+  Job(
+    title: "DevOps Engineer",
+    company: "CloudNine Systems",
+    location: "Hyderabad",
+    description: "DevOps specialist with expertise in AWS, Docker, and CI/CD pipelines.",
+  ),
+
+  Job(
+    title: "Android Developer",
+    company: "MobileFirst",
+    location: "Pune",
+    description: "Kotlin developer with experience in building and maintaining consumer apps.",
+  ),
+
+  Job(
+    title: "Data Scientist",
+    company: "Analytics Hub",
+    location: "Delhi",
+    description: "Data scientist with strong background in machine learning and statistical analysis.",
+  ),
+
+  Job(
+    title: "Full Stack Developer",
+    company: "WebWizards",
+    location: "Chennai",
+    description: "MERN stack developer with experience in building scalable web applications.",
+  ),
+
+  Job(
+    title: "Product Manager",
+    company: "InnoVentures",
+    location: "Gurgaon",
+    description: "Product manager with expertise in agile methodologies and user-centric design.",
+  ),
 ];

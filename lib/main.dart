@@ -6,6 +6,7 @@ import 'screens/forgot_password_screen.dart'; // Import Forgot Password Screen
 import 'screens/home_screen.dart';
 import 'screens/job_listings_screen.dart';
 import 'screens/reset_password_screen.dart'; // Fixed missing semicolon
+import 'screens/notification_screen.dart'; // Import Notification Screen
 
 void main() {
   runApp(const MyApp());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/reset-password': (context) => ResetPasswordScreen(), // Added Reset Password Route
         '/home': (context) => HomeScreen(),
         '/jobs': (context) => const JobListingsScreen(),
+        '/notifications': (context) => const NotificationScreen(), // Added Notification Screen Route
       },
     );
   }
